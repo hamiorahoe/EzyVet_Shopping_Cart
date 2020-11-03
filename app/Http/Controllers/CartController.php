@@ -21,6 +21,8 @@ class CartController extends Controller
             [ "name" => "Hacksaw", "price" => 18.45 ],
         ];
         // ########################################################
+
+        //Image paths for product thumbnail images
         $images = [
             "images/sledge.jpg",
             "images/axe.jpg",
