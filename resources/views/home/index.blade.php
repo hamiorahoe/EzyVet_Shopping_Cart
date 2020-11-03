@@ -10,26 +10,24 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 py-2 px-4 bg-light">
                 <div class="row">
-                    @php($id = 0)
                     @foreach($products as $product)
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 px-0">
                             <div class="card rounded-0 my-0 mx-0 text-center p-2">
-                                <img class="card-img-top rounded" src="{{url($images[$id])}}" alt="">
+                                <img class="card-img-top rounded" src="{{url($product["image"])}}" alt="">
                                 <div class="card-content">
                                         <h5 class="card-title">{{$product["name"]}}</h5>
                                         <p class="card-text">${{number_format($product["price"], 2, ".","")}}</p>
                                         <form method="POST" action="{{route('cart.addItem')}}" >
                                             @csrf
-                                            <input type="hidden" name="id" value="{{$id}}">
+                                            <input type="hidden" name="id" value="{{$product["id"]}}">
                                             <input type="hidden" name="name" value="{{$product["name"]}}">
                                             <input type="hidden" name="price" value="{{$product["price"]}}">
-                                            <input type="hidden" name="image" value="{{url($images[$id])}}">
+                                            <input type="hidden" name="image" value="{{url($product["image"])}}">
                                             <input type="submit" class="btn btn-success" value="Add To Cart">
                                         </form>
                                 </div>
                             </div>
                         </div>
-                        @php($id += 1)
                     @endforeach
                 </div>
 

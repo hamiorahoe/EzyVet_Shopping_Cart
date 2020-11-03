@@ -17,4 +17,18 @@ class cartHelper
         }
         return false;
     }
+
+    public static function initProductList($products, $images){
+        $r = $products;
+        $id = 0;
+        foreach ($r as $product){
+            $product["id"] = $id;
+            $product["image"] = $images[$id];
+            $r[$id] = $product;
+            $id ++;
+        }
+        error_log(print_r($products, TRUE));
+
+        return $r;
+    }
 }
