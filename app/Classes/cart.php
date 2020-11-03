@@ -16,10 +16,12 @@ class cart
         $this->minQty = isset($options['minQty']) ? $options['minQty'] : 1;
     }
 
+    //Check the session for shopping cart items and return item array
     public function items(){
         return Session::has('cartItems') ? Session::get('cartItems') : null;
     }
 
+    //Calculate total price of items in the cart and return the total
     public function totalPrice(){
         $total = 0;
         if(Session::has('cartItems')){
@@ -32,7 +34,7 @@ class cart
         }
         return $total;
     }
-
+    //Add an item to the cart or increase qty if item already exists
     public function add($item)
     {
         //Check if cart is populated and get cart item array
@@ -49,7 +51,7 @@ class cart
         //Replace the cart array in the session with the updated array
         Session::put("cartItems", $cartItems);
     }
-
+    //Remove an item from the cart
     public function remove($id)
     {
         //Check if cart is populated and get cart item array or assign it to blank array
@@ -61,20 +63,21 @@ class cart
         //Replace the cart array with the updated array
         Session::put("cartItems", $cartItems);
     }
-
+    //Update the quantity of a given item by the given offset
     public function updateQty($id, $offset)
     {
         //Get cart items
         $cartItems = Session::has("cartItems") ? Session::get("cartItems") : [];
         //update item quantity at given index
         $cartItems[(int)$id]['qty'] += $offset;
-        //Replace session array with updated array
-
+        //Check if new quantity is lower than minimum quantity
         if($cartItems[(int)$id]['qty'] < $this->minQty)
         {
+            //Set quantity back to minimum and warn the user
             $cartItems[(int)$id]['qty'] = $this->minQty;
             Session::put("msg", "Quantity cannot be lower than " . $this->minQty);
         }
+        //Replace session array with updated array
         Session::put("cartItems", $cartItems);
     }
 }
