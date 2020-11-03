@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Session;
 use App\Classes\Helpers\cartHelper;
 
@@ -13,6 +12,22 @@ class CartController extends Controller
     //Get cart items and display the shopping cart page
     public function getCart()
     {
+        // ######## please do not alter the following code ########
+        $products = [
+            [ "name" => "Sledgehammer", "price" => 125.75 ],
+            [ "name" => "Axe", "price" => 190.50 ],
+            [ "name" => "Bandsaw", "price" => 562.131 ],
+            [ "name" => "Chisel", "price" => 12.9 ],
+            [ "name" => "Hacksaw", "price" => 18.45 ],
+        ];
+        // ########################################################
+        $images = [
+            "images/sledge.jpg",
+            "images/axe.jpg",
+            "images/bandsaw.jpg",
+            "images/chisel.jpg",
+            "images/hacksaw.jpg"
+        ];
         //Check if cart items exist in session and assign to a variable
         $cartItems = Session::has("cartItems") ? Session::get("cartItems") : null;
 
@@ -28,8 +43,12 @@ class CartController extends Controller
         }
 
         //Display the shopping cart view with cart items and total populated
-        return view('home.index', ["cartItems" => $cartItems, 'cartTotal' => $cartTotal]);
-
+        return view('home.index', [
+            "cartItems" => $cartItems,
+            'cartTotal' => $cartTotal,
+            'products' => $products,
+            "images" => $images
+        ]);
     }
 
     //Add an item to the shopping cart and update the session

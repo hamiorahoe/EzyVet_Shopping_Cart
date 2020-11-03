@@ -1,24 +1,4 @@
 @extends("_shared.layout")
-
-
-<?php
-// ######## please do not alter the following code ########
-$products = [
-    [ "name" => "Sledgehammer", "price" => 125.75 ],
-    [ "name" => "Axe", "price" => 190.50 ],
-    [ "name" => "Bandsaw", "price" => 562.131 ],
-    [ "name" => "Chisel", "price" => 12.9 ],
-    [ "name" => "Hacksaw", "price" => 18.45 ],
-];
-// ########################################################
-$images = [
-    "images/sledge.jpg",
-    "images/axe.jpg",
-    "images/bandsaw.jpg",
-    "images/chisel.jpg",
-    "images/hacksaw.jpg"
-    ];
-?>
 @section("content")
     @if($message = \Illuminate\Support\Facades\Session::pull('msg'))
         <div class="alert alert-danger alert-block">
@@ -50,7 +30,6 @@ $images = [
                             </div>
                         </div>
                         @php($id += 1)
-
                     @endforeach
                 </div>
 
